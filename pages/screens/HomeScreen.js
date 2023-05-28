@@ -1,14 +1,90 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from "react-native";
+import { useState } from "react";
+import {
+  Box,
+  FlatList,
+  Heading,
+  Image,
+  HStack,
+  VStack,
+  Text,
+  Spacer,
+  Center,
+  NativeBaseProvider,
+} from "native-base";
 
-export default function HomeScreen() {
+export default function HomeScreen({data}) {
+  const [companies, setCompanies] = useState(data);
+
   return (
-    <View style={styles.container}></View>
+    <NativeBaseProvider>
+      <Center flex={1} px="3">
+        <Box>
+          <Heading fontSize="xl" p="4" pb="3">
+            Empresas mais reclamadas
+          </Heading>
+          <FlatList
+            data={companies.sort((a, b) =>
+              b.reclamacoes > a.reclamacoes ? 1 : -1
+            )}
+            renderItem={({ item, index }) => (
+              <Box pl={["0", "4"]} pr={["0", "5"]} py="2">
+                <HStack
+                  space={[2, 3]}
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Image
+                    size="sm"
+                    resizeMode="contain"
+                    source={{
+                      uri: item.imageURL,
+                    }}
+                    alt={`Logo ${item.nome}`}
+                  />
+                  <VStack>
+                    <Text
+                      _dark={{
+                        color: "warmGray.50",
+                      }}
+                      color={index < 3 ? "#ff0000" : "coolGray.800"}
+                      bold
+                    >
+                      {item.nome}
+                    </Text>
+                    <Text
+                      color={index < 3 ? "#ff0000" : "coolGray.800"}
+                      _dark={{
+                        color: "warmGray.200",
+                      }}
+                    >
+                      {item.cnpj}
+                    </Text>
+                  </VStack>
+                  <Spacer />
+                  <Text
+                    fontSize="sm"
+                    _dark={{
+                      color: "warmGray.50",
+                    }}
+                    color={index < 3 ? "#ff0000" : "coolGray.800"}
+                  >
+                    {item.reclamacoes.length}
+                  </Text>
+                </HStack>
+              </Box>
+            )}
+            keyExtractor={(item) => item.id}
+          />
+        </Box>
+      </Center>
+    </NativeBaseProvider>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F0F0F0',
+    backgroundColor: "#F0F0F0",
   },
 });

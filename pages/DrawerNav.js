@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './screens/HomeScreen';
+import AddClaim from './screens/AddClaimScreen';
+import data from "./screens/assets/data.json";
 
 const Drawer = createDrawerNavigator();
 
@@ -15,8 +16,14 @@ export default function DrawerNav() {
     >
       <Drawer.Screen
         name='Início'
-        component={HomeScreen}
-      />
+      >
+        {() => <HomeScreen data={data} />}
+      </Drawer.Screen>
+      <Drawer.Screen
+        name='Adicionar Reclamação'
+      >
+        {() => <AddClaim data={data} />}
+      </Drawer.Screen>
     </Drawer.Navigator>
   );
 };

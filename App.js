@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(true);
   const mockLogin = [
     { username: "@rodrigocosta34", password: "Teste@123" },
     { username: "@mariasouza", password: "Teste@12345" },
