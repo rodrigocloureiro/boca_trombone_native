@@ -14,15 +14,9 @@ import {
 } from "native-base";
 import { useState } from "react";
 
-export default function LoginScreen({ mockLogin, setIsLogged }) {
+export default function LoginScreen({ handleLogin }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
-
-  const handleLogin = (username, password) => {
-    mockLogin.some(
-      (user) => user.username === username && user.password === password
-    ) && setIsLogged(true);
-  };
 
   return (
     <NativeBaseProvider>
