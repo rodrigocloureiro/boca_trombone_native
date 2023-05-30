@@ -24,12 +24,8 @@ export default function LoginScreen({ handleLogin }) {
   const [errors, setErrors] = useState({});
 
   const handleUsernameValidation = (value) => {
-    if (
-      value === "" ||
-      value.length < 4 ||
-      value.length > 15 ||
-      !value.includes("@")
-    ) {
+    const pattern = /^(?=.*[A-Za-z0-9]$)([@])[A-Za-z\d.-]{2,15}$/;
+    if (!pattern.test(value)) {
       setErrors({
         username: "3 a 15 caracteres. Deve começar com @",
       });
@@ -91,6 +87,7 @@ export default function LoginScreen({ handleLogin }) {
                 <Input
                   onChangeText={handleUsernameValidation}
                   placeholder="@username"
+                  focusOutlineColor={errors.username !== undefined && "red.500"}
                   InputLeftElement={
                     <Icon
                       as={<MaterialIcons name="person" />}
@@ -112,6 +109,7 @@ export default function LoginScreen({ handleLogin }) {
                   onChangeText={handlePasswordValidation}
                   type={show ? "text" : "password"}
                   placeholder="Senha"
+                  focusOutlineColor={errors.password !== undefined && "red.500"}
                   InputRightElement={
                     <Pressable onPress={() => setShow(!show)}>
                       <Icon

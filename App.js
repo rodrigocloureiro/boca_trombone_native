@@ -7,6 +7,7 @@ import LoginScreen from "./pages/screens/LoginScreen";
 import InfoCompany from "./pages/screens/InfoCompany";
 import mockLogin from "./pages/screens/assets/mockLogin.json";
 import data from "./pages/screens/assets/data.json";
+import * as Location from "expo-location";
 
 const Stack = createStackNavigator();
 
@@ -16,13 +17,37 @@ export default function App() {
   const [companies, setCompanies] = useState(data);
   const [users, setUsers] = useState(mockLogin);
   const [userLogged, setUserLogged] = useState("");
+  const [location, setLocation] = useState(null);
+  const [regionName, setRegionName] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permissão de localização negada!");
+      } else {
+        let location = await Location.getCurrentPositionAsync();
+        setLocation(location);
+        const regionName = await Location.reverseGeocodeAsync({
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        });
+        setRegionName(...regionName);
+      }
+    })();
     const interval = setInterval(() => setAppIsReady(true), 1000);
     return () => clearInterval(interval);
   }, []);
 
-  const addClaim = (selectedCompany, claim, nome, sobrenome, username) => {
+  const addClaim = async (
+    selectedCompany,
+    claim,
+    nome,
+    sobrenome,
+    username
+  ) => {
+    alert("Reclamação enviada!");
     const date = new Date();
     setCompanies(
       companies.map((item) => {
@@ -40,13 +65,16 @@ export default function App() {
                   sobrenome: sobrenome,
                   status: "Aberta",
                   username: username,
+                  location:
+                    errorMsg !== null
+                      ? errorMsg
+                      : `${regionName.city} - ${regionName.region}`,
                 },
               ],
             }
           : item;
       })
     );
-    alert("Reclamação enviada!");
   };
 
   const handleLogin = (username, password) => {

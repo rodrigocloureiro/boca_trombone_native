@@ -108,6 +108,15 @@ export default function InfoCompany({ route }) {
                     >
                       {item.data} - {item.horario}
                     </Text>
+                    <Text
+                      fontSize="sm"
+                      _dark={{
+                        color: "warmGray.50",
+                      }}
+                      color="coolGray.800"
+                    >
+                      {item.location}
+                    </Text>
                   </VStack>
                 </HStack>
               </Box>
