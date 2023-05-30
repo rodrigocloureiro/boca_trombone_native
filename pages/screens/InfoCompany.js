@@ -56,7 +56,16 @@ export default function InfoCompany({ route }) {
           <FlatList
             data={reclamacoes}
             renderItem={({ item, index }) => (
-              <Box pl={["0", "4"]} pr={["0", "5"]} py="2">
+              <Box
+                borderBottomWidth="1"
+                _dark={{
+                  borderColor: "muted.50",
+                }}
+                borderColor="muted.800"
+                pl={["0", "4"]}
+                pr={["0", "5"]}
+                py="2"
+              >
                 <HStack
                   space={[2, 3]}
                   alignItems="center"
@@ -82,10 +91,11 @@ export default function InfoCompany({ route }) {
                     </Text>
                     <Text
                       fontSize="sm"
+                      bold
                       _dark={{
                         color: "warmGray.50",
                       }}
-                      color="coolGray.800"
+                      color={item.status === "Aberta" ? "red.500" : "green.500"}
                     >
                       {item.status}
                     </Text>

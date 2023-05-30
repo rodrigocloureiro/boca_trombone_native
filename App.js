@@ -46,6 +46,7 @@ export default function App() {
           : item;
       })
     );
+    alert("Reclamação enviada!");
   };
 
   const handleLogin = (username, password) => {

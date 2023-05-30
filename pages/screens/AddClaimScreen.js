@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import {
   Select,
   Box,
@@ -13,6 +14,7 @@ import { useState } from "react";
 export default function AddClaim({ companies, addClaim, userLogged }) {
   const [selectedCompany, setSelectedCompany] = useState("");
   const [claim, setClaim] = useState("");
+  const navigation = useNavigation();
 
   return (
     <NativeBaseProvider>
@@ -62,10 +64,20 @@ export default function AddClaim({ companies, addClaim, userLogged }) {
             w="75%"
             maxW="300"
             marginY={2.5}
+            value={claim}
             onChangeText={setClaim}
           />
           <Button
-            onPress={() => addClaim(selectedCompany, claim, userLogged.nome, userLogged.sobrenome, userLogged.username)}
+            onPress={() => {
+              addClaim(
+                selectedCompany,
+                claim,
+                userLogged.nome,
+                userLogged.sobrenome,
+                userLogged.username
+              );
+              navigation.goBack();
+            }}
             marginY={2.5}
           >
             Enviar reclamação

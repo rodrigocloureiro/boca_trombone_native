@@ -10,13 +10,47 @@ import {
   HStack,
   Center,
   KeyboardAvoidingView,
+  Pressable,
+  Icon,
   NativeBaseProvider,
 } from "native-base";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
 export default function LoginScreen({ handleLogin }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+  const [show, setShow] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const handleUsernameValidation = (value) => {
+    if (
+      value === "" ||
+      value.length < 4 ||
+      value.length > 15 ||
+      !value.includes("@")
+    ) {
+      setErrors({
+        username: "3 a 15 caracteres. Deve começar com @",
+      });
+    } else {
+      setErrors({ username: undefined });
+      setUsername(value);
+    }
+  };
+
+  const handlePasswordValidation = (value) => {
+    const pattern =
+      /(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$)/;
+    if (!pattern.test(value)) {
+      setErrors({
+        password: "Deve ter pelo menos um símbolo, letra maiúscula e número",
+      });
+    } else {
+      setErrors({ password: undefined });
+      setPassword(value);
+    }
+  };
 
   return (
     <NativeBaseProvider>
@@ -54,16 +88,55 @@ export default function LoginScreen({ handleLogin }) {
             <VStack space={3} mt="5">
               <FormControl>
                 <FormControl.Label>Username</FormControl.Label>
-                <Input onChangeText={setUsername} />
+                <Input
+                  onChangeText={handleUsernameValidation}
+                  placeholder="@username"
+                  InputLeftElement={
+                    <Icon
+                      as={<MaterialIcons name="person" />}
+                      size={5}
+                      ml="2"
+                      color="muted.400"
+                    />
+                  }
+                />
+                {errors.username !== undefined && (
+                  <Text fontSize="xs" color="red.500">
+                    {errors.username}
+                  </Text>
+                )}
               </FormControl>
               <FormControl>
-                <FormControl.Label>Password</FormControl.Label>
-                <Input type="password" onChangeText={setPassword} />
+                <FormControl.Label>Senha</FormControl.Label>
+                <Input
+                  onChangeText={handlePasswordValidation}
+                  type={show ? "text" : "password"}
+                  placeholder="Senha"
+                  InputRightElement={
+                    <Pressable onPress={() => setShow(!show)}>
+                      <Icon
+                        as={
+                          <MaterialIcons
+                            name={show ? "visibility" : "visibility-off"}
+                          />
+                        }
+                        size={5}
+                        mr="2"
+                        color="muted.400"
+                      />
+                    </Pressable>
+                  }
+                />
+                {errors.password !== undefined && (
+                  <Text fontSize="xs" color="red.500">
+                    {errors.password}
+                  </Text>
+                )}
                 <Link
                   _text={{
                     fontSize: "xs",
                     fontWeight: "500",
-                    color: "indigo.500",
+                    color: "lime.500",
                   }}
                   alignSelf="flex-end"
                   mt="1"
@@ -73,7 +146,7 @@ export default function LoginScreen({ handleLogin }) {
               </FormControl>
               <Button
                 mt="2"
-                colorScheme="indigo"
+                colorScheme="lime"
                 onPress={() => handleLogin(username, password)}
               >
                 Entrar
@@ -90,7 +163,7 @@ export default function LoginScreen({ handleLogin }) {
                 </Text>
                 <Link
                   _text={{
-                    color: "indigo.500",
+                    color: "lime.500",
                     fontWeight: "medium",
                     fontSize: "sm",
                   }}
