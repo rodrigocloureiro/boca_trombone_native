@@ -13,7 +13,8 @@
         "id": 1,
         "status": "Aberta",
         "data": "2023/04/02",
-        "horario": "16:30:00"
+        "horario": "16:30:00",
+        "location": "Rio de Janeiro - RJ"
       },
       {
         "nome": "Maria",
@@ -23,7 +24,8 @@
         "id": 2,
         "status": "Aberta",
         "data": "2023/02/03",
-        "horario": "15:30:00"
+        "horario": "15:30:00",
+        "location": "Rio de Janeiro - RJ"
       },
       {
         "nome": "Pedro",
@@ -33,7 +35,8 @@
         "id": 3,
         "status": "Aberta",
         "data": "2023/01/02",
-        "horario": "14:30:00"
+        "horario": "14:30:00",
+        "location": "São Paulo - SP"
       }
     ]
   },
@@ -51,7 +54,8 @@
         "id": 4,
         "status": "Aberta",
         "data": "2022/11/28",
-        "horario": "12:39:42"
+        "horario": "12:39:42",
+        "location": "Rio de Janeiro - RJ"
       }
     ]
   },
@@ -69,7 +73,8 @@
         "id": 5,
         "status": "Resolvida",
         "data": "2022/08/01",
-        "horario": "20:24:56"
+        "horario": "20:24:56",
+        "location": "Rio de Janeiro - RJ"
       }
     ]
   },
@@ -87,7 +92,8 @@
         "id": 6,
         "status": "Resolvida",
         "data": "2022/10/20",
-        "horario": "19:09:12"
+        "horario": "19:09:12",
+        "location": "Rio de Janeiro - RJ"
       }
     ]
   },
@@ -105,7 +111,8 @@
         "id": 7,
         "status": "Aberta",
         "data": "2022/06/28",
-        "horario": "12:39:42"
+        "horario": "12:39:42",
+        "location": "São Paulo - SP"
       }
     ]
   },
@@ -123,7 +130,8 @@
         "id": 8,
         "status": "Aberta",
         "data": "2022/12/12",
-        "horario": "12:39:42"
+        "horario": "12:39:42",
+        "location": "Rio de Janeiro - RJ"
       }
     ]
   },
@@ -141,7 +149,8 @@
         "id": 9,
         "status": "Resolvida",
         "data": "2022/05/06",
-        "horario": "12:39:42"
+        "horario": "12:39:42",
+        "location": "Belo Horizonte - MG"
       }
     ]
   },
@@ -159,7 +168,8 @@
         "id": 10,
         "status": "Aberta",
         "data": "2023/01/15",
-        "horario": "12:39:42"
+        "horario": "12:39:42",
+        "location": "Rio de Janeiro - RJ"
       },
       {
         "nome": "Maria",
@@ -169,7 +179,8 @@
         "id": 11,
         "status": "Aberta",
         "data": "2023/04/05",
-        "horario": "12:39:42"
+        "horario": "12:39:42",
+        "location": "Niterói - RJ"
       }
     ]
   }
