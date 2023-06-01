@@ -92,7 +92,7 @@ export default function App() {
         {!isLogged && (
           <Stack.Screen name="Login">
             {() => (
-              <LoginScreen handleLogin={handleLogin} isLogged={isLogged} />
+              <LoginScreen handleLogin={handleLogin} isLogged={isLogged} setIsLogged={setIsLogged} />
             )}
           </Stack.Screen>
         )}

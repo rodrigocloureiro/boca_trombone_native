@@ -17,13 +17,14 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-export default function LoginScreen({ handleLogin, isLogged }) {
+export default function LoginScreen({ handleLogin, isLogged, setIsLogged }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [show, setShow] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleUsernameValidation = (value) => {
+    setIsLogged(null);
     const pattern = /^(?=.*[A-Za-z0-9]$)([@])[A-Za-z\d.-]{2,15}$/;
     if (!pattern.test(value)) {
       setErrors({
@@ -36,6 +37,7 @@ export default function LoginScreen({ handleLogin, isLogged }) {
   };
 
   const handlePasswordValidation = (value) => {
+    setIsLogged(null);
     const pattern =
       /(^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$)/;
     if (!pattern.test(value)) {
