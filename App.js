@@ -13,7 +13,7 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
+  const [isLogged, setIsLogged] = useState(null);
   const [companies, setCompanies] = useState(data);
   const [users, setUsers] = useState(mockLogin);
   const [userLogged, setUserLogged] = useState("");
@@ -78,12 +78,9 @@ export default function App() {
   };
 
   const handleLogin = (username, password) => {
-    users.forEach((user) => {
-      if (user.username === username && user.senha === password) {
-        setUserLogged(user);
-        setIsLogged(true);
-      }
-    });
+    const isUserFound = users.some(user => user.username === username && user.senha === password);
+    const tempUser = users.find(user => user.username === username && user.senha === password);
+    isUserFound ? (setUserLogged(tempUser), setIsLogged(true)) : setIsLogged(false);
   };
 
   return (
@@ -94,7 +91,9 @@ export default function App() {
         )}
         {!isLogged && (
           <Stack.Screen name="Login">
-            {() => <LoginScreen handleLogin={handleLogin} />}
+            {() => (
+              <LoginScreen handleLogin={handleLogin} isLogged={isLogged} />
+            )}
           </Stack.Screen>
         )}
         <Stack.Screen name="Home">

@@ -17,7 +17,7 @@ import {
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
 
-export default function LoginScreen({ handleLogin }) {
+export default function LoginScreen({ handleLogin, isLogged }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [show, setShow] = useState(false);
@@ -128,6 +128,11 @@ export default function LoginScreen({ handleLogin }) {
                 {errors.password !== undefined && (
                   <Text fontSize="xs" color="red.500">
                     {errors.password}
+                  </Text>
+                )}
+                {isLogged === false && (
+                  <Text fontSize="xs" color="red.500">
+                    Login ou Senha incorretos
                   </Text>
                 )}
                 <Link
