@@ -16,6 +16,11 @@ export default function AddClaim({ companies, addClaim, userLogged }) {
   const [claim, setClaim] = useState("");
   const navigation = useNavigation();
 
+  const handleResetInputs = () => {
+    setSelectedCompany("");
+    setClaim("");
+  };
+
   return (
     <NativeBaseProvider>
       <Center>
@@ -69,14 +74,21 @@ export default function AddClaim({ companies, addClaim, userLogged }) {
           />
           <Button
             onPress={() => {
-              addClaim(
-                selectedCompany,
-                claim,
-                userLogged.nome,
-                userLogged.sobrenome,
-                userLogged.username
-              );
-              navigation.goBack();
+              if (selectedCompany !== "" && claim.trim() !== "") {
+                addClaim(
+                  selectedCompany,
+                  claim,
+                  userLogged.nome,
+                  userLogged.sobrenome,
+                  userLogged.username
+                );
+                handleResetInputs();
+                navigation.goBack();
+              } else {
+                selectedCompany === ""
+                  ? alert("Selecione a empresa")
+                  : alert("Escreva uma reclamação");
+              }
             }}
             marginY={2.5}
           >
