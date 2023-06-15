@@ -46,6 +46,7 @@ export default function App() {
     sobrenome,
     username
   ) => {
+    console.log(regionName);
     alert("Reclamação enviada!");
     const date = new Date();
     setCompanies(
@@ -67,7 +68,7 @@ export default function App() {
                   location:
                     errorMsg !== null
                       ? errorMsg
-                      : `${regionName.city} - ${regionName.region}`,
+                      : `${regionName.subregion} - ${regionName.region}`,
                 },
               ],
             }
