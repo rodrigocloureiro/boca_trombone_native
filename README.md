@@ -1,5 +1,7 @@
 # boca_trombone_native
-Versão solo (aprendizado) do projeto em grupo para faculdade desenvolvido em React Native
+Versão solo do projeto em grupo para faculdade desenvolvido em React Native
+
+Versão mobile do projeto Boca no Trombone, desenvolvida em React Native com Expo. Foi utilizado a biblioteca Native Base para a criação das interfaces e Expo Location para a localização ao efetuar uma reclamação.
 
 ## Rodando localmente
 
